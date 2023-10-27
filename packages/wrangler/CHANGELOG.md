@@ -1,5 +1,13 @@
 # wrangler
 
+## 3.15.1
+
+### Patch Changes
+
+- [#4149](https://github.com/cloudflare/workers-sdk/pull/4149) [`7e05f38e`](https://github.com/cloudflare/workers-sdk/commit/7e05f38e04e40125c9c5352b7ff1c95616c1baf0) Thanks [@jspspike](https://github.com/jspspike)! - Fixed issue with `tail` not using proxy
+
+* [#4219](https://github.com/cloudflare/workers-sdk/pull/4219) [`0453b447`](https://github.com/cloudflare/workers-sdk/commit/0453b447251cc670310be6a2067c84074f6a515b) Thanks [@maxwellpeterson](https://github.com/maxwellpeterson)! - Allows uploads with both cron triggers and smart placement enabled
+
 ## 3.15.0
 
 ### Minor Changes

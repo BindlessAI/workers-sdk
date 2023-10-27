@@ -1,5 +1,13 @@
 # create-cloudflare
 
+## 2.6.3
+
+### Patch Changes
+
+- [#4226](https://github.com/cloudflare/workers-sdk/pull/4226) [`5810f815`](https://github.com/cloudflare/workers-sdk/commit/5810f8150eb775663177a43266233abac19e9781) Thanks [@jculvey](https://github.com/jculvey)! - Relax empty directory check. Directories containing certain common config files and/or files created by an ide will be exempt from the pre-flight check
+
+* [#4279](https://github.com/cloudflare/workers-sdk/pull/4279) [`2526794f`](https://github.com/cloudflare/workers-sdk/commit/2526794f214e730f7f88a8146ef24f50c2caf8f6) Thanks [@dnasdw](https://github.com/dnasdw)! - fix: use a valid compatibility date for the scheduled worker ts template
+
 ## 2.6.2
 
 ### Patch Changes
