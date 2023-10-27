@@ -300,12 +300,15 @@ export function usePreviewServer({
 						address && typeof address === "object" ? address.port : port;
 					logger.log(`⬣ Listening at ${localProtocol}://${ip}:${usedPort}`);
 					const accessibleHosts =
-						ip !== "0.0.0.0" ? [ip] : getAccessibleHosts();
+						ip !== "0.0.0.0" && ip !== "::" && ip !== "*"
+							? [ip]
+							: getAccessibleHosts(ip === "0.0.0.0");
 					for (const accessibleHost of accessibleHosts) {
 						logger.log(`- ${localProtocol}://${accessibleHost}:${usedPort}`);
 					}
 				});
-				proxy.server.listen(port, ip);
+
+				proxy.server.listen(port, ip === "*" ? "::" : ip);
 			})
 			.catch((err) => {
 				if ((err as { code: string }).code !== "ABORT_ERR") {
@@ -682,12 +685,18 @@ export async function waitForPortToBeAvailable(
 	});
 }
 
-function getAccessibleHosts(): string[] {
+function getAccessibleHosts(ipv4Only: boolean): string[] {
 	const hosts: string[] = [];
 	Object.values(networkInterfaces()).forEach((net) => {
 		net?.forEach(({ family, address }) => {
-			// @ts-expect-error the `family` property is numeric as of Node.js 18.0.0
-			if (family === "IPv4" || family === 4) hosts.push(address);
+			if (ipv4Only) {
+				// @ts-expect-error the `family` property is numeric as of Node.js 18.0.0
+				if (family === "IPv4" || family === 4) {
+					hosts.push(address);
+				}
+			} else {
+				hosts.push(address);
+			}
 		});
 	});
 	return hosts;
